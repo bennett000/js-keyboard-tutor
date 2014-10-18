@@ -66,6 +66,7 @@ its advantages.
 
 * Who the hell is going to run this?
 * What kind of latency will Midi->Node.js->WebSocket->Browser have?
+* Security
 
 Hopefully this will work on Macs, the node-midi library I plan to use runs on
 GNU/Linux, Mac, and even Windows.  Outside of the ./scripts folder I will
@@ -75,8 +76,16 @@ With respect to latency, I'm hoping to be able to respond to feedback in less
 than one hundred milliseconds; even if the client/server are split by a gigabit
 network.
 
+Security is a concern since we're setting up an HTTP server.  This software is
+*not* being designed with the intention of being run on the open internet.
+Users are expected to run their servers in the privacy of their private networks
+(homes), or within the confines of a *single* computer, working as both client,
+and server.
 
 ### Implementation Nice To Haves
 
-* Central (worldwide) storage for records comparisions
+* Central (worldwide) storage for records comparisons
 * User contributed tests, riffs, sequences, etc
+
+These are obviously a little more than nice to haves.  These create a *lot* more 
+complication than a simple rig a user can run in their home.
