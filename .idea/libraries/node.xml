@@ -1,0 +1,37 @@
+<component name="libraryTable">
+  <library name="node" type="javaScript">
+    <properties>
+      <option name="frameworkName" value="node_modules" />
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/node_modules/midi/test/virtual-loopback-test-automated.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/midi/test/output-test.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/midi/test/virtual-output-test.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/midi/test/virtual-loopback-test.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/midi/test/unit-tests.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/midi/test/virtual-readStream-test.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/midi/src/lib/RtMidi/doc/html/dynsections.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/midi/test/input-test.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/midi/midi.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/midi/node_modules/bindings/bindings.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/midi/test/virtual-writeStream-test.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/midi/test/virtual-input-test.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/node_modules/midi/test/virtual-loopback-test-automated.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/midi/test/output-test.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/midi/test/virtual-output-test.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/midi/test/virtual-loopback-test.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/midi/test/unit-tests.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/midi/src/lib/RtMidi/doc/html/jquery.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/midi/src/lib/RtMidi/doc/html/dynsections.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/midi/test/virtual-readStream-test.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/midi/test/input-test.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/midi/midi.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/midi/node_modules/bindings/bindings.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/midi/test/virtual-writeStream-test.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/midi/test/virtual-input-test.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

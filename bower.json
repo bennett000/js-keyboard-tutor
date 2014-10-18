@@ -1,0 +1,22 @@
+{
+  "name": "piano-typing-tutor",
+  "version": "0.1.0",
+  "description": "Typing tutor for midi pianos",
+  "moduleType": [
+    "globals"
+  ],
+  "license":"GPL-3.0+",
+  "private": false,
+  "ignore": [
+    "node_modules",
+    "bower_components",
+    "lib",
+    "spec",
+    "scripts",
+    "docs"
+  ],
+  "devDependencies": {
+  },
+  "dependencies": {
+  }
+}
