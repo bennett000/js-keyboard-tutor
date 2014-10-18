@@ -8,6 +8,9 @@ may already be existing software out there that fills this purpose, but to my
 knowledge, none of it is FLOSS; plus I'm hoping this can be a fun project to
 relax with on the week-ends.
 
+FYI, this is Free software, a formal license is included, and can also be found
+[here](http://www.gnu.org/licenses/gpl.html "GPL Version 3")
+
 ## Specifications
 
 At a high level the software will consist of three modes
