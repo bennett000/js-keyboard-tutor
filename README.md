@@ -92,3 +92,35 @@ and server.
 
 These are obviously a little more than nice to haves.  These create a *lot* more 
 complication than a simple rig a user can run in their home.
+
+
+## Contributing
+
+This is Free software, so fork away.  Bug fixes are welcome.  Feature
+contributions are welcome too, _but_ as of the time of this writing this is a
+work in process, so please beware.  If people are interested in this project I
+would be happy to set up some sort of central project management for it, perhaps
+github already does that.
+
+We will attempt to observe semantic versioning MAJOR.MINOR.PATCH or 
+BREAKING.FEATURE.PATCH if you want to think about it that way.
+
+### Style
+
+There is no formal style guide yet.  However there are project settings for 
+WebStorm, including a JSHint settings file.  Specs are all written using a
+modern (done vs runs) Jasmine
+
+General Considerations:
+
+* single quotes for JavaScript strings
+* dash-style-word-separation for CSS, HTML attributes, and filenames
+* camelCase for JavaScript names
+* .has should return something, or false
+* Ideally one (1) parameter per function, *max with good reason* three (3)
+* Ideally one (1) expect per it block
+* Ideally one (1) line per it block, max five (5), with exceptions
+* Ideally five (5) statements or less per function - figuratively a function 
+should "do one thing"
+* Expose namespaces/modules at the _bottom_ of the namespace/module so it's easy
+to find
