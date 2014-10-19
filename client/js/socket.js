@@ -18,44 +18,82 @@
 
 /*global angular*/
 angular.module('ptt-socket', [
-    'socket-io-wrapper'
-]).factory('socket', ['socketIo', '$q', '$window', function (socketIo, $q, $window) {
+    'socket-io-wrapper',
+    'ptt-observer'
+]).factory('socket', ['socketIo', '$q', '$window', 'observer', function (socketIo, $q, $window, observer) {
     'use strict';
 
-    var ports = [],
+    var that = observer(),
+        updateListener = angular.noop,
         events = {
-            'listPorts': onListPorts
+            'listPorts': { fn: defaultEventHandler, value: [] },
+            'getDefaultDevice': { fn: defaultEventHandler, value: null },
+            'isStarted': { fn: defaultEventHandler, value: false }
         },
     socket;
 
-    function onListPorts(data) {
-        if (Array.isArray(data)) {
-            ports = data;
-        } else {
-            console.debug('onListPorts:', data);
-        }
+    function defaultEventHandler(data) {
+        /*jshint validthis:true */
+        this.value = data;
     }
+
 
     function listen() {
         Object.keys(events).forEach(function (event) {
-            socket.on(event, events[event]);
+            socket.on(event, function (data){
+                events[event].fn(data);
+                that.triggerSync(event, data);
+                that.triggerSync('update', data);
+            });
         });
     }
 
     function update() {
-        socket.emit('listPorts');
+        Object.keys(events).forEach(function (event) {
+            socket.emit(event);
+        });
+    }
+
+    function expose() {
+        Object.keys(events).forEach(function (event) {
+            that[event] = function localAccessor() {
+                return events[event].value;
+            };
+        });
+    }
+
+    function destroy() {
+        updateListener();
+        updateListener = angular.noop;
     }
 
     function init() {
-        socket.Io($window.location.host);
+        socket = socketIo($window.location.host);
         listen();
         update();
+        expose();
     }
 
     init();
 
-}]).run(['socket', function () {
+
+    that.init = init;
+    that.destroy = destroy;
+
+    return that;
+
+}]).run(['socket', function (socket) {
     'use strict';
 
-    console.log('dude', window.location);
+    console.log('dude', socket.listPorts());
+
+    socket.on('listPorts', function (ports){
+        console.log(ports);
+        socket.listPorts();
+    });
+
+    socket.on('isStarted', function (well){
+        console.log(well);
+        socket.isStarted();
+    });
 }]);

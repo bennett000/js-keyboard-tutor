@@ -80,19 +80,19 @@ _________   _...._
 <script src="/lib/socket.io-client/socket.io.js"></script>
 <script src="/lib/angular/angular.js"></script>
 <script src="/js/socket-wrapper.js"></script>
-<script src="/js/socket-wrapper.js"></script>
+<script src="/js/observer.js"></script>
 <script src="/js/socket.js"></script>
 <script src="/js/app.js"></script>
-<script>
-    console.log('hello world');
-    var socket = io('http://localhost:8000');
-    socket.on('midi', function (data) {
-        console.log('who is it', data);
-    });
-    socket.emit('listPorts');
-    socket.on('listPorts', function (data) {
-        console.log('Ports', data);
-    });
-</script>
+<!--<script>-->
+    <!--console.log('hello world');-->
+    <!--var socket = io('http://localhost:8000');-->
+    <!--socket.on('midi', function (data) {-->
+        <!--console.log('who is it', data);-->
+    <!--});-->
+    <!--socket.emit('listPorts');-->
+    <!--socket.on('listPorts', function (data) {-->
+        <!--console.log('Ports', data);-->
+    <!--});-->
+<!--</script>-->
 </body>
 </html>
