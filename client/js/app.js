@@ -18,5 +18,6 @@
 
 /*global angular*/
 angular.module('PianoTypingTutor', [
-    'ptt-socket'
+    'ptt-socket',
+    'ptt-directives'
 ]);

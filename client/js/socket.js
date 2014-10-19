@@ -20,31 +20,53 @@
 angular.module('ptt-socket', [
     'socket-io-wrapper',
     'ptt-observer'
-]).factory('socket', ['socketIo', '$q', '$window', 'observer', function (socketIo, $q, $window, observer) {
+]).factory('socket', ['socketIo', '$q', '$window', 'observer', '$rootScope', function (socketIo, $q, $window, observer, $rootScope) {
     'use strict';
 
     var that = observer(),
         updateListener = angular.noop,
         events = {
-            'listPorts': { fn: defaultEventHandler, value: [] },
+            'listDevices': { fn: defaultEventHandler, value: [] },
             'getDefaultDevice': { fn: defaultEventHandler, value: null },
             'isStarted': { fn: defaultEventHandler, value: false }
         },
     socket;
+
+    function stop() {
+        socket.emit('stop');
+    }
+    function start(data) {
+        socket.emit('start', data);
+    }
+
+    function setDefaultDevice(value) {
+        if (events.listDevices.value.indexOf(value) === -1) {
+            return false;
+        }
+        socket.emit('setDefaultDevice', value);
+        return true;
+    }
 
     function defaultEventHandler(data) {
         /*jshint validthis:true */
         this.value = data;
     }
 
-
     function listen() {
         Object.keys(events).forEach(function (event) {
             socket.on(event, function (data){
-                events[event].fn(data);
-                that.triggerSync(event, data);
-                that.triggerSync('update', data);
+                $rootScope.$apply(function () {
+                    events[event].fn(data);
+                    that.triggerSync(event, data);
+                    that.triggerSync('update', data);
+                });
             });
+        });
+    }
+
+    function onListen(data) {
+        $rootScope.$apply(function () {
+            that.triggerSync('midi', data);
         });
     }
 
@@ -72,11 +94,14 @@ angular.module('ptt-socket', [
         listen();
         update();
         expose();
+        socket.emit('listen');
+        socket.on('listen', onListen);
     }
 
     init();
 
 
+    that.setDefaultDevice = setDefaultDevice;
     that.init = init;
     that.destroy = destroy;
 
@@ -85,11 +110,11 @@ angular.module('ptt-socket', [
 }]).run(['socket', function (socket) {
     'use strict';
 
-    console.log('dude', socket.listPorts());
+    console.log('dude', socket.listDevices());
 
-    socket.on('listPorts', function (ports){
+    socket.on('listDevices', function (ports){
         console.log(ports);
-        socket.listPorts();
+        socket.listDevices();
     });
 
     socket.on('isStarted', function (well){

@@ -23,7 +23,7 @@ serve = require('./serve.js');
 /**
  * @returns {Array.<String>}
  */
-function listPorts() {
+function listDevices() {
     'use strict';
 
     return midiInput.list();
@@ -80,7 +80,7 @@ function start(data) {
 }
 
 module.exports.events = {
-    listPorts: listPorts,
+    listDevices: listDevices,
     getDefaultDevice: getDefaultDevice,
     setDefaultDevice: setDefaultDevice,
     listen: listen,
