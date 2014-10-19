@@ -35,6 +35,12 @@ describe('Config module', function () {
         expect(helpers.fs.readFileSync).toHaveBeenCalled();
     });
 
+    it('init should essentially alias load', function () {
+        spyOn(helpers.fs, 'readFileSync').andCallThrough();
+        config.init();
+        expect(helpers.fs.readFileSync).toHaveBeenCalled();
+    });
+
     it('load should set defaultDevice to null if readFileSync throws',
        function () {
            var old = helpers.fs.readFileSync;

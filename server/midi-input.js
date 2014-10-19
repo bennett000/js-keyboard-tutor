@@ -46,6 +46,9 @@ function listPorts() {
     return list;
 }
 
+/**
+ * @param name {string} name of the port as described by midi's "getPortName"
+ */
 function openPort(name) {
     'use strict';
 
@@ -57,6 +60,7 @@ function openPort(name) {
     }
 
     input.openPort(index);
+    input.ignoreTypes(false, false, false);
 }
 
 function openDefault() {
@@ -79,8 +83,27 @@ input.on('message', function (deltaTime, message) {
     console.log('M:', message, 'd:', deltaTime);
 });
 
-input.ignoreTypes(false, false, false);
 
+function on() {
+
+}
+
+function start() {
+
+}
+
+function stop() {
+
+}
+
+function init() {
+
+}
+
+module.exports.init = init;
+module.exports.start = start;
+module.exports.stop = stop;
+module.exports.on = on;
 module.exports.helpers = {
     openDefault: openDefault,
     openPort: openPort,

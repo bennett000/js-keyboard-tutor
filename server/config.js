@@ -65,8 +65,12 @@ function defaultDevice(newDefault) {
     return writeConfig();
 }
 
-loadConfig();
+function init() {
+    loadConfig();
+}
+init();
 
+module.exports.init = init;
 module.exports.defaultDevice = defaultDevice;
 module.exports.load = loadConfig;
 module.exports.save = writeConfig;

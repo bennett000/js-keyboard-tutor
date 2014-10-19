@@ -17,3 +17,20 @@
  */
 
 /*global window, jasmine, beforeEach, describe, expect, waitsFor, spyOn, runs, it, module,inject */
+
+var rewire = require('rewire'),
+    helpers = require('./helpers.js'),
+    midiInput = rewire('../midi-input.js');
+
+midiInput.__set__('config', helpers.config);
+midiInput.__set__('input', helpers.midi);
+
+describe('midi input provider', function () {
+    'use strict';
+
+    it('helpers.totalPorts should call midi.totalPorts', function () {
+        spyOn(helpers.midi, 'getPortCount').andCallThrough();
+        midiInput.helpers.totalPorts();
+        expect(helpers.midi.getPortCount).toHaveBeenCalled();
+    });
+});
