@@ -16,45 +16,22 @@
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var server = require('http').createServer(serve),
-io = require('socket.io')(server),
-fs = require('fs'),
+var express = require('express'),
+app = express(),
+http = require('http').Server(app),
+io = require('socket.io')(http),
 midiInput = require('./midi-input.js'),
 config = require('./config.js'),
 midiModuleStatus,
-events = require('./events.js'),
-/** @const */
-defaultIndex = '<html><body>default</body></html>',
-index;
+events = require('./events.js');
 
-function cacheIndex() {
-    'use strict';
 
-    try {
-        index = fs.readFileSync('www/index.html', 'utf-8');
-    } catch (err) {
-        console.warn(err.message);
-        index = defaultIndex;
-    }
-}
-
-function serve(req, res) {
-    'use strict';
-
-    if (!index) {
-        cacheIndex();
-    }
-
-    res.writeHead(200);
-    res.end(index);
-}
-
-function initEvents() {
+function initEvents(socket) {
     'use strict';
 
     Object.keys(events.events).forEach(function (message) {
-        io.on(message, function (data) {
-            io.emit(message, events.events[message](data));
+        socket.on(message, function (data) {
+            socket.emit(message, events.events[message](data));
         });
     });
 }
@@ -72,18 +49,23 @@ function midiStatus(val) {
 function init() {
     'use strict';
 
-    initEvents();
     midiModuleStatus = midiInput.init();
-    server.listen(config.port());
-    console.log('');
-    console.log('Piano Typing Tutor - Listening On Port ' + config.port());
-    console.log('');
+    app.use(express.static(__dirname + '/www'));
+    http.listen(config.port(), function () {
+        console.log('');
+        console.log('Piano Typing Tutor - Listening On Port ' + config.port());
+        console.log('');
+    });
+    io.on('connection', function (socket) {
+        console.log('connected');
+        initEvents(socket);
+    });
 }
 
 function restart() {
     'use strict';
 
-    server.close(init);
+    //server.close(init);
 }
 
 init();

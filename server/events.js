@@ -54,8 +54,9 @@ function setDefaultDevice(val) {
 function listen() {
     'use strict';
 
-    return midiInput.listen(function (deltaTime, message) {
-        serve.io.emit({ deltaTime: deltaTime, message: message });
+    return midiInput.on(function (deltaTime, message) {
+        console.log('we here');
+        serve.io.emit('midi', { deltaTime: deltaTime, message: message });
     });
 }
 
