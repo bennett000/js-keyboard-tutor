@@ -52,17 +52,20 @@ function listPorts() {
 function openPort(name) {
     'use strict';
 
-    var ports = listPorts,
+    var ports = listPorts(),
         index = [ports.indexOf(name)];
 
-    if (index === -1) {
-        throw new Error();
+    if (+index === -1) {
+        throw new Error('midiInput: openPort: port ' + name + ' not found');
     }
 
     input.openPort(index);
     input.ignoreTypes(false, false, false);
 }
 
+/**
+ * @returns {boolean}
+ */
 function openDefault() {
     'use strict';
 
@@ -72,16 +75,22 @@ function openDefault() {
         return null;
     }
 
-    return openPort(defaultName);
+    try {
+        openPort(defaultName);
+    } catch (err) {
+        return false;
+    }
+
+    return true;
 }
 
-console.log(listPorts().join('\n'));
-
-input.openPort(1);
-
-input.on('message', function (deltaTime, message) {
-    console.log('M:', message, 'd:', deltaTime);
-});
+//console.log(listPorts().join('\n'));
+//
+//input.openPort(1);
+//
+//input.on('message', function (deltaTime, message) {
+//    console.log('M:', message, 'd:', deltaTime);
+//});
 
 
 function on() {

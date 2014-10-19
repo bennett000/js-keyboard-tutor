@@ -33,4 +33,57 @@ describe('midi input provider', function () {
         midiInput.helpers.totalPorts();
         expect(helpers.midi.getPortCount).toHaveBeenCalled();
     });
+
+    it('helpers.listPorts should return an array of portNames', function () {
+        expect(Array.isArray(midiInput.helpers.listPorts())).toBe(true);
+    });
+
+    it('helpers.openPort should throw if the port does not exist', function () {
+        expect(function () {
+            midiInput.helpers.openPort('green');
+        }).toThrow();
+    });
+
+    it('helpers.openPort should call midi.openPort', function () {
+        spyOn(helpers.midi, 'openPort').andCallThrough();
+        midiInput.helpers.openPort('One');
+        expect(helpers.midi.openPort).toHaveBeenCalled();
+    });
+
+    it('helpers.openPort should call midi.ignoreTypes', function () {
+        spyOn(helpers.midi, 'ignoreTypes').andCallThrough();
+        midiInput.helpers.openPort('One');
+        expect(helpers.midi.ignoreTypes).toHaveBeenCalled();
+    });
+
+    it('openDefault should call config.defaultDevice', function () {
+        spyOn(helpers.config, 'defaultDevice').andCallThrough();
+        midiInput.helpers.openDefault();
+        expect(helpers.config.defaultDevice).toHaveBeenCalled();
+    });
+
+    it('openDefault should call midi.openPort', function () {
+        spyOn(helpers.midi, 'openPort').andCallThrough();
+        midiInput.helpers.openDefault();
+        expect(helpers.midi.openPort).toHaveBeenCalled();
+    });
+
+    it('openDefault should return true if there is a default port, ' +
+       'and openPort is successfully called', function () {
+        expect(midiInput.helpers.openDefault()).toBe(true);
+    });
+
+    it('openDefault should return false if there is a default port, ' +
+       'and openPort fails', function () {
+        spyOn(helpers.config, 'defaultDevice').andReturn('green');
+        expect(midiInput.helpers.openDefault()).toBe(false);
+        expect(helpers.config.defaultDevice).toHaveBeenCalled();
+    });
+
+    it('openDefault should return null if the default port is falsey',
+       function () {
+           spyOn(helpers.config, 'defaultDevice').andReturn(null);
+           expect(midiInput.helpers.openDefault()).toBe(null);
+           expect(helpers.config.defaultDevice).toHaveBeenCalled();
+       });
 });

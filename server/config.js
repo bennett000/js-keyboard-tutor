@@ -52,7 +52,7 @@ function writeConfig() {
 }
 
 /**
- * @param newDefault
+ * @param newDefault {string=}
  * @returns {string|boolean|null}
  */
 function defaultDevice(newDefault) {
@@ -66,6 +66,8 @@ function defaultDevice(newDefault) {
 }
 
 function init() {
+    'use strict';
+
     loadConfig();
 }
 init();

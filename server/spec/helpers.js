@@ -30,7 +30,7 @@ function FS() {
 function Config() {
     'use strict';
 
-    this.defaultDevice = function () { return 'red'; };
+    this.defaultDevice = function () { return 'One'; };
 }
 
 function Port(name) {
@@ -43,12 +43,17 @@ function Port(name) {
 function Midi() {
     'use strict';
     var ports = {
-        1: new Port('One')
+        0: new Port('One')
     }, listeners = { 'message': []};
 
     this.getPortCount = function () { return Object.keys(ports).length; };
-    this.getPortName = function (id) { return ports[id] || null; };
     this.ignoreTypes = function () { };
+    this.getPortName = function (id) {
+        if (!ports[id]) {
+            return null;
+        }
+        return ports[id].name || null;
+    };
     this.trigger = function (channel) {
         if (!listeners[channel]) {
             return;
@@ -72,7 +77,8 @@ function Midi() {
         listeners[channel].push(fn);
     };
     this.openPort = function (id) {
-        if (ports[id]) { ports[id].isOpen = true;
+        if (ports[id]) {
+            ports[id].isOpen = true;
         }
     };
 }
