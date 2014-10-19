@@ -83,14 +83,14 @@ function openDefault() {
 
     return true;
 }
-
-console.log(listPorts().join('\n'));
-
-input.openPort(1);
-
-input.on('message', function (deltaTime, message) {
-    console.log('M:', message, 'd:', deltaTime);
-});
+//
+//console.log(listPorts().join('\n'));
+//
+//input.openPort(1);
+//
+//input.on('message', function (deltaTime, message) {
+//    console.log('M:', message, 'd:', deltaTime);
+//});
 
 
 /**
@@ -109,6 +109,8 @@ function on(listener) {
 
 module.exports.init = openDefault;
 module.exports.on = on;
+module.exports.list = listPorts;
+module.exports.open = openPort;
 module.exports.helpers = {
     openDefault: openDefault,
     openPort: openPort,

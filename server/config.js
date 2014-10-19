@@ -18,7 +18,7 @@
 
 var fs = require('fs'),
     /** @const */
-    configFile = __dirname + '/etc/config.js',
+    configFile = __dirname + '/etc/config.json',
     config;
 
 /**
@@ -65,6 +65,17 @@ function defaultDevice(newDefault) {
     return writeConfig();
 }
 
+function defaultPort(newDefault) {
+    'use strict';
+
+    if (newDefault === undefined) {
+        return config.port;
+    }
+    config.port = +newDefault || 8000;
+    return writeConfig;
+
+}
+
 function init() {
     'use strict';
 
@@ -74,5 +85,6 @@ init();
 
 module.exports.init = init;
 module.exports.defaultDevice = defaultDevice;
+module.exports.port = defaultPort;
 module.exports.load = loadConfig;
 module.exports.save = writeConfig;

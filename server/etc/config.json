@@ -1,3 +1,4 @@
 {
-    "defaultDevice": null
+    "defaultDevice": null,
+    "port": 8000
 }
