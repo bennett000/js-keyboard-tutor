@@ -14,10 +14,17 @@ module.exports = function (config) {
         frameworks: ['jasmine'],
 
         files: [
+            'client/lib/angular/angular.js',
+            'client/lib/angular-mocks/angular-mocks.js',
+
+            'client/spec/mock*',
+            'client/spec/*-spec.js',
+            'client/js/*.js'
         ],
 
         // list of files to exclude
         exclude: [
+            'client/js/socket-wrapper.js'
         ],
 
  // test results reporter to use
@@ -63,7 +70,7 @@ module.exports = function (config) {
 
         // coverage support
         preprocessors: {
-            'client/app*.js': ['coverage']
+            'client/js/*.js': ['coverage']
         }
     });
 };

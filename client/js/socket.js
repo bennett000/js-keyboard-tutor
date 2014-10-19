@@ -19,6 +19,43 @@
 /*global angular*/
 angular.module('ptt-socket', [
     'socket-io-wrapper'
-]).factory('socket', ['socketIo', function (socketIo) {
+]).factory('socket', ['socketIo', '$q', '$window', function (socketIo, $q, $window) {
+    'use strict';
 
+    var ports = [],
+        events = {
+            'listPorts': onListPorts
+        },
+    socket;
+
+    function onListPorts(data) {
+        if (Array.isArray(data)) {
+            ports = data;
+        } else {
+            console.debug('onListPorts:', data);
+        }
+    }
+
+    function listen() {
+        Object.keys(events).forEach(function (event) {
+            socket.on(event, events[event]);
+        });
+    }
+
+    function update() {
+        socket.emit('listPorts');
+    }
+
+    function init() {
+        socket.Io($window.location.host);
+        listen();
+        update();
+    }
+
+    init();
+
+}]).run(['socket', function () {
+    'use strict';
+
+    console.log('dude', window.location);
 }]);
