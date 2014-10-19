@@ -15,8 +15,11 @@
     "scripts",
     "docs"
   ],
-  "devDependencies": {},
+  "devDependencies": {
+    "angular-mocks": "~1.3.0"
+  },
   "dependencies": {
-    "socket.io-client": "~1.1.0"
+    "socket.io-client": "~1.1.0",
+    "angular": "~1.3.0"
   }
 }

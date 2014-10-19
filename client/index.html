@@ -1,22 +1,98 @@
 <!DOCTYPE html>
-<html>
+<!--
+@preserve
+_________   _...._
+\        |.'      '-.
+ \        .'```'.    '.     .|       .|
+  \      |       \     \  .' |_    .' |_
+   |     |        |    |.'     | .'     |
+   |      \      /    .'--.  .-''--.  .-'
+   |     |\`'-.-'   .'    |  |     |  |
+   |     | '-....-'`      |  |     |  |
+  .'     '.               |  '.'   |  '.'
+'-----------'             |   /    |   /
+                          `'-'     `'-'
+    Piano Typing Tutor
+
+    Copyright © 2014 Michael J. Bennett
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<html ng-app="PianoTypingTutor">
+<base href="/"/>
 <head lang="en">
     <meta charset="UTF-8">
     <title>Piano Typing Tutor</title>
+    <link rel="stylesheet" href="/css/normalize.css"/>
+    <style>
+        body, html {
+            font-family: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif;
+            background-color: black;
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body>
+
+<!-- Display when scripts are disabled -->
+<noscript>
+    <h1>Well Done</h1>
+
+    <p>
+        Choosing to run your browser with JavaScript turned off is a *wise*
+        choice, and we applaud you for it. _However_ Paino Typing Tutor is
+        a JavaScript web application, and therefore requires JavaScript to
+        function.
+    </p>
+
+    <p>
+        Fortunately, this is Free software, and you are welcome to comb over all
+        of the source (client, and server), _before_ you run anything.  In fact
+        by design, this software (server, and client) are intended to be run on
+        your local machine, _not_ a third party's web server.
+    </p>
+</noscript>
+
+<!-- Display only when too small -->
+<div class="too-small">
+    <h1>Device, or Window Too Small</h1>
+    <p>Piano Typing Tutor requires a display of at least eight hundred by six
+    hundred pixels (800x600px)</p>
+</div>
+
+<!-- "Normal" Display -->
+<div class="ptt-body">
     <h1>Hello Piano World</h1>
-    <script src="/lib/socket.io-client/socket.io.js"></script>
-    <script>
-        console.log('hello world');
-        var socket = io('http://localhost:8000');
-        socket.on('midi', function (data) {
-            console.log('who is it', data);
-        });
-        socket.emit('listPorts');
-        socket.on('listPorts', function (data) {
-            console.log('Ports', data);
-        });
-    </script>
+</div>
+
+<script src="/lib/socket.io-client/socket.io.js"></script>
+<script src="/lib/angular/angular.js"></script>
+<script src="/js/socket-wrapper.js"></script>
+<script src="/js/socket-wrapper.js"></script>
+<script src="/js/socket.js"></script>
+<script src="/js/app.js"></script>
+<script>
+    console.log('hello world');
+    var socket = io('http://localhost:8000');
+    socket.on('midi', function (data) {
+        console.log('who is it', data);
+    });
+    socket.emit('listPorts');
+    socket.on('listPorts', function (data) {
+        console.log('Ports', data);
+    });
+</script>
 </body>
 </html>
