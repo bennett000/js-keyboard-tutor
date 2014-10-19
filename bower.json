@@ -5,7 +5,7 @@
   "moduleType": [
     "globals"
   ],
-  "license":"GPL-3.0+",
+  "license": "GPL-3.0+",
   "private": false,
   "ignore": [
     "node_modules",
@@ -15,8 +15,8 @@
     "scripts",
     "docs"
   ],
-  "devDependencies": {
-  },
+  "devDependencies": {},
   "dependencies": {
+    "socket.io-client": "~1.1.0"
   }
 }

@@ -84,34 +84,30 @@ function openDefault() {
     return true;
 }
 
-//console.log(listPorts().join('\n'));
-//
-//input.openPort(1);
-//
-//input.on('message', function (deltaTime, message) {
-//    console.log('M:', message, 'd:', deltaTime);
-//});
+console.log(listPorts().join('\n'));
+
+input.openPort(1);
+
+input.on('message', function (deltaTime, message) {
+    console.log('M:', message, 'd:', deltaTime);
+});
 
 
-function on() {
+/**
+ * @param listener {function(Array.<number>, number)}
+ * @returns {*}
+ */
+function on(listener) {
+    'use strict';
 
+    if (typeof listener !== 'function') {
+        return null;
+    }
+
+    return input.on('message', listener);
 }
 
-function start() {
-
-}
-
-function stop() {
-
-}
-
-function init() {
-
-}
-
-module.exports.init = init;
-module.exports.start = start;
-module.exports.stop = stop;
+module.exports.init = openDefault;
 module.exports.on = on;
 module.exports.helpers = {
     openDefault: openDefault,
