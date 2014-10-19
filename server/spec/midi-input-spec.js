@@ -86,4 +86,15 @@ describe('midi input provider', function () {
            expect(midiInput.helpers.openDefault()).toBe(null);
            expect(helpers.config.defaultDevice).toHaveBeenCalled();
        });
+
+    it('on should return null if not given a function', function () {
+        expect(midiInput.on()).toBe(null);
+    });
+
+    it('on should call midi.on if given a function', function () {
+        spyOn(helpers.midi, 'on').andCallThrough();
+        var fn = function () {};
+        midiInput.on(fn);
+        expect(helpers.midi.on).toHaveBeenCalledWith('message', fn);
+    });
 });
