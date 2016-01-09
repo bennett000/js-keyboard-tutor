@@ -53,12 +53,13 @@ function openPort(name) {
     'use strict';
 
     var ports = listPorts(),
-        index = [ports.indexOf(name)];
+        index = ports.indexOf(name);
 
     if (+index === -1) {
         throw new Error('midiInput: openPort: port ' + name + ' not found');
     }
 
+    console.debug('midiInput: openPort: ', name, index);
     input.openPort(index);
     input.ignoreTypes(false, false, false);
 }
@@ -104,7 +105,10 @@ function on(listener) {
         return null;
     }
 
-    return input.on('message', listener);
+    return input.on('message', function (a, b) {
+        console.log('listen', a, b);
+        listener(a, b);
+    });
 }
 
 module.exports.init = openDefault;

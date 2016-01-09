@@ -55,7 +55,7 @@ function listen() {
     'use strict';
 
     return midiInput.on(function (deltaTime, message) {
-        console.log('we here');
+        console.log('forwarding');
         serve.io.emit('midi', { deltaTime: deltaTime, message: message });
     });
 }
@@ -74,6 +74,7 @@ function start(data) {
 
     try {
         midiInput.open(data.port);
+        serve.midiStatus(true);
     } catch (err) {
         return false;
     }

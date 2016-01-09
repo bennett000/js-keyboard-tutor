@@ -47,7 +47,7 @@ function writeConfig() {
     if (!config || typeof config !== 'object') {
         return false;
     }
-    config = fs.writeFileSync(configFile, config);
+    fs.writeFileSync(configFile, JSON.stringify(config));
     return true;
 }
 
@@ -61,6 +61,7 @@ function defaultDevice(newDefault) {
     if (newDefault === undefined) {
         return config.defaultDevice;
     }
+    console.log('COonfig', config);
     config.defaultDevice = newDefault;
     return writeConfig();
 }

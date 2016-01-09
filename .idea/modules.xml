@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/piano-typing-tutor.iml" filepath="$PROJECT_DIR$/.idea/piano-typing-tutor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/keyboard-tutor.iml" filepath="$PROJECT_DIR$/.idea/keyboard-tutor.iml" />
     </modules>
   </component>
 </project>
-
