@@ -29,5 +29,9 @@ build
 coverage
 
 # compiled files
-client/src/**/*.js
-client/src/**/*.js
+client/app/**/*.js
+client/app/**/*.js
+
+# external typings
+client/typings/**/*
+
