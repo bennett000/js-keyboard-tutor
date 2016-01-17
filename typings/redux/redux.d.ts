@@ -18,7 +18,7 @@ declare module Redux {
     meta?: any;
   }
 
-  interface Hash<T> {
+  interface Map<T> {
     [id: string]: T;
   }
 
@@ -64,9 +64,9 @@ declare module Redux {
 
   interface ReduxStatic {
     createStore<T>(reducer: Reducer<T>, initialState?: T): Store<T>;
-    bindActionCreators(actionCreators: Hash<ActionCreator>,
-                                dispatch: Dispatch): Hash<Dispatch>;
-    combineReducers<T>(reducers: Hash<Reducer<any>>): Reducer<T>;
+    bindActionCreators(actionCreators: Map<ActionCreator>,
+                                dispatch: Dispatch): Map<Dispatch>;
+    combineReducers<T>(reducers: Map<Reducer<any>>): Reducer<T>;
     applyMiddleware<T>(...middlewares: Middleware<T>[]): CreateStore<T>;
     compose<T extends Function>(...functions: Function[]): T;
   }

@@ -1,6 +1,6 @@
 import {List} from 'immutable';
-const {createStore, applyMiddleware, compose} = Redux;
 import * as Redux from 'redux';
+const {createStore, applyMiddleware, compose} = Redux;
 const thunk = require('redux-thunk');
 import reducer from '../reducers/index';
 
