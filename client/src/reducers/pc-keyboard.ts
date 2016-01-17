@@ -1,6 +1,6 @@
 import { PC_KEYPRESS } from '../actions/pc-keypress';
-const immutable = require('immutable');
-const List = immutable.List;
+const Immutable = require('immutable');
+const List = Immutable.List;
 
 export function pcKeyboard(state = List(), action) {
   switch (action.type) {

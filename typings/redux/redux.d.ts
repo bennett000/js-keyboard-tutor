@@ -3,6 +3,12 @@
 // Definitions by: William Buchwalter <https://github.com/wbuchwalter/>, Vincent Prouillet <https://github.com/Keats/>, Michael Bennett <https://github.com/bennett000/>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
 
+declare let Redux: Redux.ReduxStatic;
+
+declare module 'redux' {
+  export = Redux;
+}
+
 declare module Redux {
 
   interface Action {
@@ -28,8 +34,8 @@ declare module Redux {
     (): void;
   }
 
-  interface Reducer<S> {
-    (state: S, action: Action): S;
+  interface Reducer<T> {
+    (state: T, action: Action): T;
   }
 
   interface Dispatch {
@@ -38,21 +44,17 @@ declare module Redux {
 
   interface MiddlewareArg<T> {
     dispatch: Dispatch;
-    getState: GetState<T>;
+    getState: T;
   }
 
   interface Middleware<T> {
     (obj: MiddlewareArg<T>): Function;
   }
 
-  interface GetState<T> {
-    (): T;
-  }
-
   interface Store<T> {
     replaceReducer(nextReducer: Reducer<T>): void;
     dispatch(action: Action): Action;
-    getState(): GetState<T>;
+    getState(): T;
     subscribe(listener: Listener): Unsubscribe;
   }
 
@@ -60,15 +62,12 @@ declare module Redux {
     (reducer: Reducer<T>, initialState?: T): Store<T>;
   }
 
-  function createStore<T>(reducer: Reducer<T>, initialState?: T): Store<T>;
-  function bindActionCreators(actionCreators: Hash<ActionCreator>,
-                              dispatch: Dispatch): Hash<Dispatch>;
-  function combineReducers<T>(reducers: Hash<Reducer<any>>): Reducer<T>;
-  function applyMiddleware<T>(...middlewares: Middleware<T>[]): CreateStore<T>;
-  function compose<T extends Function>(...functions: Function[]): T;
-
-}
-
-declare module "redux" {
-  export = Redux;
+  interface ReduxStatic {
+    createStore<T>(reducer: Reducer<T>, initialState?: T): Store<T>;
+    bindActionCreators(actionCreators: Hash<ActionCreator>,
+                                dispatch: Dispatch): Hash<Dispatch>;
+    combineReducers<T>(reducers: Hash<Reducer<any>>): Reducer<T>;
+    applyMiddleware<T>(...middlewares: Middleware<T>[]): CreateStore<T>;
+    compose<T extends Function>(...functions: Function[]): T;
+  }
 }

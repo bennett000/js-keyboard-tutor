@@ -1,6 +1,7 @@
 import {Component, Inject} from 'angular2/core';
 import {PcKeyboardController} from '../controllers/pc-keyboard-controller';
 import {Store} from 'redux';
+import * as S from '../store/configure-store';
 
 @Component({
   selector: 'keyboard-tutor',
@@ -8,7 +9,7 @@ import {Store} from 'redux';
 })
 export class App {
   private unsubscribe: Function;
-  private store: Store<any>;
+  private store: Store<S.KeyboardTutorState>;
 
   constructor(@Inject('ngRedux') ngRedux,
               private pcKeyboardController: PcKeyboardController) {
@@ -18,7 +19,7 @@ export class App {
   public ngOnInit() {
     this.pcKeyboardController.attach();
     this.unsubscribe = this.store.subscribe(() => {
-      console.log(this.store.getState());
+      console.log(this.store.getState().pcKeyboard);
     });
   }
 
